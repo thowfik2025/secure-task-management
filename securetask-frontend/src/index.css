@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Global CSS — SecureTask Design System
+   ============================================================ */
+
+/* Custom CSS variables for consistent theming */
+:root {
+  --bg-primary: #0f172a;     /* Dark slate background */
+  --bg-secondary: #1e293b;   /* Slightly lighter sidebar/card bg */
+  --bg-card: #1e293b;        /* Card backgrounds */
+  --border-color: #334155;    /* Subtle borders */
+  --text-primary: #f1f5f9;   /* Primary text */
+  --text-secondary: #94a3b8; /* Secondary/muted text */
+  --accent-blue: #3b82f6;    /* Primary brand color */
+  --accent-blue-dark: #2563eb; /* Button hover */
+  --accent-green: #22c55e;   /* Success states */
+  --accent-red: #ef4444;     /* Error/delete actions */
+  --accent-yellow: #f59e0b;  /* Warning / MEDIUM priority */
+  --accent-purple: #a855f7;  /* HIGH priority */
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+
+/* ============================================================
+   Reusable Component Styles
+   ============================================================ */
+
+/* Card container */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+/* Primary button */
+.btn-primary {
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--accent-blue-dark); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Danger button */
+.btn-danger {
+  background: transparent;
+  color: var(--accent-red);
+  border: 1px solid var(--accent-red);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-danger:hover { background: var(--accent-red); color: white; }
+
+/* Ghost button */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+/* Form input */
+.input {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input:focus { border-color: var(--accent-blue); }
+.input::placeholder { color: var(--text-secondary); }
+
+/* Form select */
+select.input { cursor: pointer; }
+
+/* Label */
+.label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Form group */
+.form-group { margin-bottom: 1rem; }
+
+/* ============================================================
+   Status and Priority Badges
+   ============================================================ */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Status badges */
+.badge-todo       { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
+.badge-inprogress { background: #1e3a5f; color: #60a5fa; border: 1px solid #2563eb; }
+.badge-completed  { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+
+/* Priority badges */
+.badge-low    { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+.badge-medium { background: #451a03; color: #fb923c; border: 1px solid #ea580c; }
+.badge-high   { background: #450a0a; color: #f87171; border: 1px solid #dc2626; }
+
+/* ============================================================
+   Alerts
+   ============================================================ */
+.alert-error   { background: #450a0a; border: 1px solid #dc2626; color: #fca5a5; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.875rem; }
+.alert-success { background: #14532d; border: 1px solid #16a34a; color: #86efac; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.875rem; }
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.page-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* ============================================================
+   Loading spinner
+   ============================================================ */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 2rem auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+.empty-state h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+
+/* ============================================================
+   Table
+   ============================================================ */
+.table-wrapper { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+.modal-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 480px;
+}
